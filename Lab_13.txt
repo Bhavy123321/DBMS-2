@@ -1,0 +1,37 @@
+---------------------------------Part – A --------------------------------
+1. db.Stock.createIndex({company:1})
+
+2. db.Stock.createIndex({sector:1,sales:1});
+
+3. db.Stock.getIndexes();
+
+4. db.Stock.dropIndex("company_1");
+
+5.var cursor=db.Stock.find();while(cursor.hasNext()){printjson(cursor.next());}
+
+6.var cursor=db.Stock.find().limit(3);while(cursor.hasNext()){printjson(cursor.next());}
+
+7.var cursor=db.Stock.find().sort({sales:-1});while(cursor.hasNext()){printjson(cursor.next());}
+
+8. var cursor=db.Stock.find().skip(2);while(cursor.hasNext()){printjson(cursor.next());}
+
+9.var cursorArray=db.Stock.find().toArray();printjson(cursorArray);
+
+10. db.createCollection("Companies", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["company", "sector"],
+            properties: {
+                company: {
+                    bsonType: "string",
+                    description: "must be a string and is required"
+                },
+                sector: {
+                    bsonType: "string",
+                    description: "must be a string and is required"
+                }
+            }
+        }
+    }
+});

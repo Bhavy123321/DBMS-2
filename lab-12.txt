@@ -1,0 +1,39 @@
+1.db.Student.aggregate({$group:{_id:'$CITY'}})
+
+2.db.Student.aggregate({$group:{_id:'$CITY',StudentCount:{$sum:1}}})
+
+3.db.Student.aggregate([{$group:{_id: null ,FeesCount: { $sum: '$FEES' }}}])
+
+4.db.Student.aggregate([{$group: {_id: null, avgfees: {$avg: "$FEES"}}}]);
+
+5.db.Student.aggregate([{$group: {_id: null, maxFees: {$max: "$FEES"}, minFees: {$min: "$FEES"}}}]);
+
+6.db.Student.aggregate([{$group: {_id: "$CITY", totalFees: {$sum: "$FEES"}}}]);
+
+7.db.Student.aggregate([{$group: {_id: "$gender", maxFees: {$max: "$FEES"}}}]);	
+
+8.db.Student.aggregate([{$group: {_id: "$CITY", maxFees: {$max: "$FEES"}, minFees: {$min: "$FEES"}}}]);
+
+9.db.Student.aggregate([{$match: {CITY: "Baroda"}}, {$count: "BarodaCount"}]);
+
+10.db.Student.aggregate([{$match: {CITY: "Rajkot"}}, {$group: {_id: "$CITY", avgFees: {$avg: "$FEES"}}}]);
+
+11.db.Student.aggregate([{$match: {CITY: "Rajkot"}}, {$group: {_id: "$CITY", avgFees: {$avg: "$FEES"}}}]);
+
+12.db.Student.aggregate([{$group:{_id: {Department:'$DEPARTMENT'} ,FeesCount: { $sum: '$FEES' }}}])
+
+13.db.Student.aggregate([{$group:{_id:{City:'$CITY',Gender:'$GENDER'},MinCount:{$min:'$FEES'}}}]);
+
+14.db.Student.aggregate([{$sort:{FEES:-1}},{$limit:5}])
+
+15.db.Student.aggregate([{$group:{_id:"$CITY",avgFees:{$avg:"$FEES"},count:{$sum:1}}},{$match:{count:{$gt:1}}}]);
+
+16.db.Student.aggregate([{$match:{DEPARTMENT:{$in:["CE", "Mechanical"]}}},{$group:{_id:"Total Fees(CE& Mechanical)",totalFees:{$sum:"$FEES"}}}]);
+
+17.db.Student.aggregate([{$group:{_id:{Department:"$DEPARTMENT",Gender:"$GENDER"},count:{$sum:1}}}]);
+
+18.db.Student.aggregate([{$match:{CITY:"Rajkot"}},{$group:{_id:"$DEPARTMENT",avgFees:{$avg:"$FEES"}}}]);
+
+19.db.Student.aggregate([{$group:{_id:"$SEM",totalFees:{$sum:"$FEES"},avgFees:{$avg:"$FEES"}}},{$sort:{totalFees:-1}}]);
+
+20.db.Student.aggregate([{$group:{_id:"$CITY",totalFees:{$sum:"$FEES"}}},{$sort:{totalFees:-1}},{$limit:3}]); 
